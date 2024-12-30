@@ -24,11 +24,17 @@ resource "google_compute_instance" "default" {
   name         = "simple-instance"
   machine_type = "e2-medium"
   zone         = "us-central1-a"
-
   boot_disk {
+    auto_delete = true
+    device_name = "instance-20241230-041646"
+
     initialize_params {
-      image = "debian-cloud/debian-9" # Replace with your desired image
+      image = "projects/debian-cloud/global/images/debian-12-bookworm-v20241210"
+      size  = 10
+      type  = "pd-balanced"
     }
+
+    mode = "READ_WRITE"
   }
 
   network_interface {
