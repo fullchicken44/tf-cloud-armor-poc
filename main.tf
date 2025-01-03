@@ -42,4 +42,23 @@ resource "google_compute_instance" "default" {
   }
 }
 
+# Create VPC 1
+module "vpc1" {
+  source                                 = "./modules/vpc"
+  project_id                             = "amazing-city-438803-e9"
+  network_name                           = "vpc1"
+  routing_mode                           = "GLOBAL"
+  shared_vpc_host                        = false
+  auto_create_subnetworks                = false
+  delete_default_internet_gateway_routes = false
+}
 
+# Create "vpc2"
+module "vpc2" {
+  source                                 = "./modules/vpc"
+  project_id                             = "my-second-project-445004"
+  network_name                           = "vpc2"
+  auto_create_subnetworks                = false
+  shared_vpc_host                        = false
+  delete_default_internet_gateway_routes = false
+}
