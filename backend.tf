@@ -1,6 +1,6 @@
 terraform {
   backend "gcs" {
-    bucket = "terraform-state-amazing-city-438803-e9"
+    bucket = "terraform-state-int-pso-lab-terraform"
     prefix = "terraform/state"
   }
 }
