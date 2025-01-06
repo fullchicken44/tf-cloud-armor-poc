@@ -14,38 +14,37 @@ terraform {
 }
 
 provider "google" {
-  project = "amazing-city-438803-e9" # Replace with your GCP project ID
-  region  = "asia-southeast1"        # Replace with your desired region
-  zone    = "asia-southeast-a"       # Replace with your desired zone
+  project = "int-pso-lab-terraform" # Replace with your GCP project ID
+  region  = "asia-southeast1"       # Replace with your desired region
+  zone    = "asia-southeast-a"      # Replace with your desired zone
 }
 
-# Create a compute instance
-resource "google_compute_instance" "default" {
-  name         = "simple-instance"
-  machine_type = "e2-medium"
-  zone         = "us-central1-a"
-  boot_disk {
-    auto_delete = true
-    device_name = "instance-20241230-041646"
 
-    initialize_params {
-      image = "projects/debian-cloud/global/images/debian-12-bookworm-v20241210"
-      size  = 10
-      type  = "pd-balanced"
-    }
-
-    mode = "READ_WRITE"
-  }
-
-  network_interface {
-    network = "default"
-  }
-}
+#   name         = "simple-instance"
+#   machine_type = "e2-medium"
+#   zone         = "us-central1-a"
+#   boot_disk {
+#     auto_delete = true
+#     device_name = "instance-20241230-041646"
+#
+#     initialize_params {
+#       image = "projects/debian-cloud/global/images/debian-12-bookworm-v20241210"
+#       size  = 10
+#       type  = "pd-balanced"
+#     }
+#
+#     mode = "READ_WRITE"
+#   }
+#
+#   network_interface {
+#     network = "default"
+#   }
+# }
 
 # Create VPC 1
 module "vpc1" {
   source                                 = "./modules/vpc"
-  project_id                             = "amazing-city-438803-e9"
+  project_id                             = "int-pso-lab-terraform"
   network_name                           = "vpc1"
   routing_mode                           = "GLOBAL"
   shared_vpc_host                        = false
@@ -53,12 +52,11 @@ module "vpc1" {
   delete_default_internet_gateway_routes = false
 }
 
-# Create "vpc2"
-module "vpc2" {
-  source                                 = "./modules/vpc"
-  project_id                             = "my-second-project-445004"
-  network_name                           = "vpc2"
-  auto_create_subnetworks                = false
-  shared_vpc_host                        = false
-  delete_default_internet_gateway_routes = false
-}
+
+#   source                                 = "./modules/vpc"
+#   project_id                             = "my-second-project-445004"
+#   network_name                           = "vpc2"
+#   auto_create_subnetworks                = false
+#   shared_vpc_host                        = false
+#   delete_default_internet_gateway_routes = false
+# }
