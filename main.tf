@@ -52,11 +52,18 @@ module "vpc1" {
   delete_default_internet_gateway_routes = false
 }
 
+# Create VP2
+module "vpc2" {
+  source                                 = "./modules/vpc"
+  project_id                             = "int-pso-lab-terraform"
+  network_name                           = "vpc2"
+  routing_mode                           = "GLOBAL"
+  shared_vpc_host                        = false
+  auto_create_subnetworks                = false
+  delete_default_internet_gateway_routes = false
+}
 
-#   source                                 = "./modules/vpc"
-#   project_id                             = "my-second-project-445004"
-#   network_name                           = "vpc2"
-#   auto_create_subnetworks                = false
-#   shared_vpc_host                        = false
-#   delete_default_internet_gateway_routes = false
-# }
+
+
+
+
