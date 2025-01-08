@@ -12,6 +12,8 @@ crash.log
 
 # Plan output files
 *.tfplan
+*.binary
+tfplan.json
 
 # Override files (not commonly used, but sometimes created for local overrides)
 override.tf
