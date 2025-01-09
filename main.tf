@@ -52,6 +52,24 @@ module "vpc1" {
   delete_default_internet_gateway_routes = false
 }
 
+resource "google_compute_firewall" "default" {
+  name    = "test-firewall"
+  network = "vpc1"
+
+  allow {
+    protocol = "icmp"
+  }
+  allow {
+    protocol = "tcp"
+    ports    = ["80", "443"]
+  }
+
+  source_ranges = ["172.1.2.3/32"]
+
+  source_tags = ["foo"]
+  target_tags = ["web"]
+}
+
 # Create VP2
 module "vpc2" {
   source                                 = "./modules/vpc"
@@ -61,6 +79,24 @@ module "vpc2" {
   shared_vpc_host                        = false
   auto_create_subnetworks                = false
   delete_default_internet_gateway_routes = false
+}
+
+resource "google_compute_firewall" "default2" {
+  name    = "test-firewall2"
+  network = "vpc2"
+
+  allow {
+    protocol = "icmp"
+  }
+  allow {
+    protocol = "tcp"
+    ports    = ["80", "443"]
+  }
+
+  source_ranges = ["172.1.2.3/32"]
+
+  source_tags = ["foo"]
+  target_tags = ["web"]
 }
 
 module "vpn_ha-1" {
