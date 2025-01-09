@@ -52,6 +52,21 @@ module "vpc1" {
   delete_default_internet_gateway_routes = false
 }
 
+resource "google_compute_firewall" "rules" {
+  project     = "int-pso-lab-terraform"
+  name        = "my-firewall-rule"
+  network     = "vpc1"
+  description = "Creates firewall rule targeting tagged instances"
+
+  allow {
+    protocol = "tcp"
+    ports    = ["80", "8080", "1000-2000"]
+  }
+
+  source_tags = ["foo"]
+  target_tags = ["web"]
+}
+
 # Create VP2
 module "vpc2" {
   source                                 = "./modules/vpc"
@@ -61,6 +76,21 @@ module "vpc2" {
   shared_vpc_host                        = false
   auto_create_subnetworks                = false
   delete_default_internet_gateway_routes = false
+}
+
+resource "google_compute_firewall" "rules2" {
+  project     = "int-pso-lab-terraform"
+  name        = "my-firewall-rule2"
+  network     = "vpc2"
+  description = "Creates firewall rule targeting tagged instances"
+
+  allow {
+    protocol = "tcp"
+    ports    = ["80", "8080", "1000-2000"]
+  }
+
+  source_tags = ["foo"]
+  target_tags = ["web"]
 }
 
 module "vpn_ha-1" {
