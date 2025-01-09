@@ -14,10 +14,25 @@ resource "google_compute_network" "network" {
   network_profile                           = var.network_profile
 }
 
+resource "google_compute_firewall" "rules" {
+  project     = "int-pso-lab-terraform"
+  name        = "my-firewall-rule"
+  network     = var.network_name
+  description = "Creates firewall rule targeting tagged instances"
+
+  allow {
+    protocol = "tcp"
+    ports    = ["80", "8080", "1000-2000"]
+  }
+
+  source_ranges = ["172.1.2.3/32"]
+
+  source_tags = ["foo"]
+  target_tags = ["web"]
+}
+
 # Optionally enable shared vpc
 resource "google_compute_shared_vpc_host_project" "shared_vpc_host" {
-  provider = google-beta
-
   count      = var.shared_vpc_host ? 1 : 0
   project    = var.project_id
   depends_on = [google_compute_network.network]
