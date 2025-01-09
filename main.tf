@@ -54,7 +54,7 @@ module "vpc1" {
 
 resource "google_compute_firewall" "default" {
   name    = "test-firewall"
-  network = "vpc1"
+  network = module.vpc1.network_self_link
 
   allow {
     protocol = "icmp"
