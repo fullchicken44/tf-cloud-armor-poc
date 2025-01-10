@@ -14,39 +14,39 @@ definition:
       attribute: "can_ip_forward"
       operator: "equals"
       value: false
-
----
-
-# CKV_GCP_002
-metadata:
-  id: "CKV_GCP_002"
-  name: "Ensure Storage Buckets have Uniform Bucket-Level Access enabled"
-  category: "Storage"
-scope:
-  provider: "google"
-  resource_types:
-    - "google_storage_bucket"
-definition:
-  and:
-    - cond_type: "attribute"
-      attribute: "uniform_bucket_level_access.enabled"
-      operator: "equals"
-      value: true
-
----
-
-# CKV_GCP_003
-metadata:
-  id: "CKV_GCP_003"
-  name: "Ensure SQL Database Instances do not have Public IP"
-  category: "Database"
-scope:
-  provider: "google"
-  resource_types:
-    - "google_sql_database_instance"
-definition:
-  and:
-    - cond_type: "attribute"
-      attribute: "settings.ip_configuration.ipv4_enabled"
-      operator: "equals"
-      value: false
+#
+# ---
+#
+# # CKV_GCP_002
+# metadata:
+#   id: "CKV_GCP_002"
+#   name: "Ensure Storage Buckets have Uniform Bucket-Level Access enabled"
+#   category: "Storage"
+# scope:
+#   provider: "google"
+#   resource_types:
+#     - "google_storage_bucket"
+# definition:
+#   and:
+#     - cond_type: "attribute"
+#       attribute: "uniform_bucket_level_access.enabled"
+#       operator: "equals"
+#       value: true
+#
+# ---
+#
+# # CKV_GCP_003
+# metadata:
+#   id: "CKV_GCP_003"
+#   name: "Ensure SQL Database Instances do not have Public IP"
+#   category: "Database"
+# scope:
+#   provider: "google"
+#   resource_types:
+#     - "google_sql_database_instance"
+# definition:
+#   and:
+#     - cond_type: "attribute"
+#       attribute: "settings.ip_configuration.ipv4_enabled"
+#       operator: "equals"
+#       value: false
