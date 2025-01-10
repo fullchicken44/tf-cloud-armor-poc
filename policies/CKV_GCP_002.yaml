@@ -1,14 +1,18 @@
 metadata:
-  id: "CKV_GCP_002"
-  name: "Ensure HA VPN Gateway has at least two interfaces"
-  category: "Networking"
+  id: "CKV_GCP_VPN_010"
+  name: "Ensure VPN tunnel uses IKE version 2"
+  category: "Security"
+  guideline: "VPN tunnels should use IKE version 2 as it provides stronger security features compared to IKE version 1, including better protection against DoS attacks, improved performance, and stronger cryptography."
+  severity: "HIGH"
 scope:
   provider: "google"
   resource_types:
-    - "google_compute_ha_vpn_gateway"
+    - "google_compute_vpn_tunnel"
 definition:
   and:
     - cond_type: "attribute"
-      attribute: "vpn_interfaces"
-      operator: "length_greater_than"
-      value: 1
+      resource_types:
+        - "google_compute_vpn_tunnel"
+      attribute: "ike_version"
+      operator: "equals"
+      value: 2
