@@ -1,0 +1,14 @@
+metadata:
+  id: "CKV_GCP_002"
+  name: "Ensure HA VPN Gateway has at least two interfaces"
+  category: "Networking"
+scope:
+  provider: "google"
+  resource_types:
+    - "google_compute_ha_vpn_gateway"
+definition:
+  and:
+    - cond_type: "attribute"
+      attribute: "vpn_interfaces"
+      operator: "length_greater_than"
+      value: 1

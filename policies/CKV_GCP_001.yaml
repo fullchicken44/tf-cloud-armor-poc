@@ -1,0 +1,16 @@
+# CKV_GCP_001
+metadata:
+  id: "CKV_GCP_001"
+  name: "Ensure Compute Instances have IP Forwarding disabled"
+  category: "Networking and Firewall"
+scope:
+  provider: "google"
+  resource_types:
+    - "google_compute_instance"
+definition:
+  and:
+    - cond_type: "attribute"
+      attribute: "can_ip_forward"
+      operator: "equals"
+      value: false
+
