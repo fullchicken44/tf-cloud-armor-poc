@@ -1,16 +1,18 @@
-# CKV_GCP_001
 metadata:
-  id: "CKV_GCP_001"
-  name: "Ensure Compute Instances have IP Forwarding disabled"
-  category: "Networking and Firewall"
+  id: "CKV_GCP_VPN_001"
+  name: "Ensure VPN tunnel uses IKE version 2"
+  category: "Security"
+  guideline: "VPN tunnels should use IKE version 2 as it provides stronger security features compared to IKE version 1, including better protection against DoS attacks, improved performance, and stronger cryptography."
+  severity: "HIGH"
 scope:
   provider: "google"
   resource_types:
-    - "google_compute_instance"
+    - "google_compute_vpn_tunnel"
 definition:
   and:
     - cond_type: "attribute"
-      attribute: "can_ip_forward"
+      resource_types:
+        - "google_compute_vpn_tunnel"
+      attribute: "ike_version"
       operator: "equals"
-      value: false
-
+      value: 2
