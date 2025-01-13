@@ -22,3 +22,11 @@ output "project_id" {
   value       = var.shared_vpc_host && length(google_compute_shared_vpc_host_project.shared_vpc_host) > 0 ? google_compute_shared_vpc_host_project.shared_vpc_host[0].project : google_compute_network.network.project
   description = "VPC project id"
 }
+
+output "routing_mode" {
+  value = google_compute_network.network.routing_mode
+}
+
+output "auto_create_subnetworks" {
+  value = google_compute_network.network.auto_create_subnetworks
+}
